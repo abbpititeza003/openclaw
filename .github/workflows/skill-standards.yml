@@ -1,0 +1,25 @@
+name: Skill standards
+
+on:
+  pull_request:
+    paths:
+      - '**/SKILL.md'
+      - '.github/scripts/verify_skills.sh'
+      - '.github/workflows/skill-standards.yml'
+  push:
+    branches: [ main ]
+    paths:
+      - '**/SKILL.md'
+      - '.github/scripts/verify_skills.sh'
+      - '.github/workflows/skill-standards.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify changed SKILL.md files
+        run: .github/scripts/verify_skills.sh
